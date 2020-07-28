@@ -6,6 +6,9 @@ const type: IResolvers = {
    Season:{
        year: parent => parent.season,
        urlMobile: parent => getWikipediaMobile(parent.url)
+   },
+   Race:{
+       name: parent => parent.raceName
    }
 };
 
