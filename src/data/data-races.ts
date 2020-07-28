@@ -1,4 +1,5 @@
 import { F1 } from './data-source';
+import { checkYear, checkRound } from '../lib/utils';
 
 export class RaceData extends F1 {
   constructor() {
@@ -6,11 +7,16 @@ export class RaceData extends F1 {
   }
 
   async getRacesByYear(year: string) {
-    const currentYear = new Date().getFullYear();
-    if (isNaN(+year)|| +year<1950|| +year>currentYear) {
-      year = String(currentYear);
-    }
+    year = checkYear(year);
     return await this.get(`${year}.json`, {
+      cacheOptions: { ttl: 60 },
+    });
+  }
+
+  async getRacesByYearAndRound(year: string, round: number) {
+    year = checkYear(year);
+    round = checkRound(round);
+    return await this.get(`${year}/${round}.json`, {
       cacheOptions: { ttl: 60 },
     });
   }

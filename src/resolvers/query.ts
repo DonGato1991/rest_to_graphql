@@ -11,6 +11,12 @@ const query: IResolvers = {
             return await dataSources.races.getRacesByYear(year).then(
                 (data: any) => data.MRData.RaceTable.Races
             );
+        },
+
+        async raceSelect(_: void, {year, round}, {dataSources}){
+            return await dataSources.races.getRacesByYearAndRound(year, round).then(
+                (data: any) => data.MRData.RaceTable.Races[0]
+            );
         }
     }
 };
