@@ -2,6 +2,9 @@ type Query {
   seasonsList: [Season!]!
   racesByYear(year: String!):[Race!]!
   raceSelect(year: String!, round: Int!):Race
+  driversList(pageElements: Int, page: Int): [Driver!]!
+  driversByYear(year: String!): [Driver!]!
+  driversByYearAndRound(year: String!, round: Int!): [Driver!]!
 }
 
 type Season {
@@ -34,4 +37,16 @@ type Location {
   lng: String!
   locality: String!
   country: String!
+}
+
+type Driver {
+  id: String!
+  url: String!
+  urlMobile: String!
+  givenName: String!
+  familyName: String!
+  dateOfBirth: String!
+  nationality: String!
+  code: String
+  permanentNumber: String
 }

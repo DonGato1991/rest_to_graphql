@@ -20,6 +20,9 @@ const type: IResolvers = {
   Location: {
     lng: (parent) => parent.long,
   },
+  Driver: {
+    id: (parent) => parent.driverId,
+  }
 };
 
 export default type;
