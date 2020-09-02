@@ -32,6 +32,16 @@ const query: IResolvers = {
                 (data: any) => data.MRData.DriverTable.Drivers
             );
         },
+        async getInfoDriver(_: void, { id }, {dataSources}){
+            return await dataSources.drivers.getDriverById(id).then(
+                (data: any) => data.MRData.DriverTable.Drivers[0]
+            );
+        },
+        async getStandings(_: void, { year }, {dataSources}){
+            return await dataSources.standings.getStandings(year).then(
+                (data: any) => data.MRData.StandingsTable.StandingsLists[0].DriverStandings
+            );
+        },
     }
 };
 

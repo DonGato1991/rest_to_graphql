@@ -22,6 +22,9 @@ const type: IResolvers = {
   },
   Driver: {
     id: (parent) => parent.driverId,
+  },
+  DriverStanding:{
+    driver: (parent) => parent.Driver
   }
 };
 

@@ -1,52 +1,146 @@
 type Query {
+  " Lista de Temporadas, desde 1950 hasta 2019 "
   seasonsList: [Season!]!
-  racesByYear(year: String!):[Race!]!
-  raceSelect(year: String!, round: Int!):Race
+  """
+  Lista de carreras, desde 1950 hasta 2019.
+  Si se ingresa un año no valido, se tomará el actual.
+  """
+  racesByYear(year: String!): [Race!]!
+  """
+  Carrera especifica, requiere ingresar un año y ronda, el año va desde 1950 hasta 2019.
+  Si se ingresa un año no valido, se tomará el actual.
+  """
+  raceSelect(year: String!, round: Int!): Race
+  """
+  Lista de conductores, requiere ingresar el # de registros que se quiere
+  devolver y la página solicitada.
+  """
   driversList(pageElements: Int, page: Int): [Driver!]!
+  """
+  Lista de conductores, requiere ingresar un año desde 1950 hasta 2019.
+  Si se ingresa un año no valido, se tomará el actual.
+  """
   driversByYear(year: String!): [Driver!]!
+  """
+  Lista de conductores, requiere ingresar un año (desde 1950 hasta 2019) y el # de ronda.
+  Si se ingresa un año no valido, se tomará el actual.
+  """
   driversByYearAndRound(year: String!, round: Int!): [Driver!]!
+  """
+  Conductor especifico.
+  Requiere ingresar el identificador del Conductor.
+  """
+  getInfoDriver(id: String!): Driver!
+  """
+  Lista de estadisticas de carrera por año.
+  Requiere ingresar un año que va desde 1950 al 2019, si el año ingresado
+  no es valido tomará el actual.
+  """
+  getStandings(year: String!): [DriverStanding!]!
 }
 
+"Representación de las Temporadas de F1 "
 type Season {
+  "Año en la que se realizó la temporada."
   year: String!
+  "Url para ver más información."
   url: String!
+  "url adaptado para dispositivos móviles."
   urlMobile: String!
 }
 
+"Representación de las carreras de F1"
 type Race {
+  "Tempporada en la que se realizó."
   season: String!
+  "Número de rondas."
   round: String!
+  "Url de información detallada."
   url: String!
+  "Url de info. detallada para móviles."
   urlMobile: String!
+  "Nombre de la carrera."
   name: String!
+  "Circuito"
   circuit: Circuit!
+  "Fecha de la carrera"
   date: String!
+  "Hora de la carrera"
   time: String
 }
 
+"Circuito en la que se realiza la carrera"
 type Circuit {
+  "Código único"
   id: String!
+  "Url de información detallada."
   url: String!
+  "Url de info. detallada para móviles."
   urlMobile: String!
+  "Nombre Representativo"
   name: String!
+  "Información sobre la Localidad del mismo."
   location: Location!
 }
 
+"Representación de las localidades de F1"
 type Location {
+  "Coordenada de Latitud"
   lat: String!
+  "Coordenada de Longitud"
   lng: String!
+  "Localización"
   locality: String!
+  "País de ubicación"
   country: String!
 }
 
+"Representación de los conductores de F1"
 type Driver {
+  "Código único"
   id: String!
+  "Url de información detallada."
   url: String!
+  "Url de info. detallada para móviles."
   urlMobile: String!
+  "Nombre"
   givenName: String!
+  "Apellido"
   familyName: String!
+  "Fecha de Nacimiento"
   dateOfBirth: String!
+  "Nacionalidad"
   nationality: String!
+  "Código"
   code: String
+  "Número Permanente"
   permanentNumber: String
+}
+
+"Representación de las estadisticas y resultados de F1"
+type DriverStanding {
+  "Posición"
+  position: String!
+  "Posición en texto"
+  positionText: String!
+  "Puntos"
+  points: String!
+  "Ganadores"
+  wins: String!
+  "Conductor"
+  driver: Driver!
+  "Constructores"
+  constructors: [Constructor!]!
+}
+
+"Representación de los constructores de F1"
+type Constructor {
+  "Código único"
+  constructorId: String!
+  "Url de información detallada."
+  url: String!
+  "Nombre"
+  name: String!
+  "Nacionalidad"
+  nationality: String!
 }

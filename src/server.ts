@@ -24,7 +24,8 @@ async function init() {
         dataSources: () => ({
             seasons: new dataSources.SeasonData(),
             races:  new dataSources.RaceData(),
-            drivers: new dataSources.DriverData()
+            drivers: new dataSources.DriverData(),
+            standings: new dataSources.StandingData()
         })
     });
 
