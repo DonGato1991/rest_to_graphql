@@ -1,4 +1,5 @@
 import { F1 } from './data-source';
+import { paginatorProperty } from '../lib/utils';
 
 export class CircuitData extends F1 {
   constructor() {
@@ -6,15 +7,13 @@ export class CircuitData extends F1 {
   }
 
   async getCircuits(pageElements: number = -1, page: number = 1) {
-    if (pageElements === -1) {
-      return await this.get('circuits.json?limit=1000', {
-        cacheOptions: { ttl: 60 },
-      });
-    }
-    const offset = (page - 1) * pageElements;
-    const limit = pageElements;
-    const filter = `limit=${limit}&offset=${offset}`;
-    return await this.get(`circuits.json?${filter}`, {
+    return await this.get(`circuits.json?${paginatorProperty(pageElements, page)}`, {
+      cacheOptions: { ttl: 60 },
+    });
+  }
+
+  async getCircuitById(id: string) {
+    return await this.get(`/circuits/${id}.json`, {
       cacheOptions: { ttl: 60 },
     });
   }

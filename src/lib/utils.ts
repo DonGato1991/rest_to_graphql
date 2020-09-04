@@ -10,9 +10,19 @@ export function checkYear(year: string) {
   return year;
 }
 
-export function checkRound(round: number) {  
+export function checkRound(round: number) {
   if (round >= 100) {
     round = 1;
   }
   return round;
+}
+
+export function paginatorProperty(pageElements: number, page: number) {
+  if (pageElements === -1) {
+    return 'limit=1000';
+  }
+  const offset = (page - 1) * pageElements;
+  const limit = pageElements;
+  const filter = `limit=${limit}&offset=${offset}`;
+  return filter;
 }

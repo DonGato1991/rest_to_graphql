@@ -42,6 +42,11 @@ type Query {
   devolver y la página solicitada.
   """
   circuitList(pageElements: Int, page: Int): [Circuit!]!
+  """
+  Circuito especifico.
+  Requiere ingresar el identificador del circuito.
+  """
+  getInfoCircuit(id: String!): Circuit!
 }
 
 "Representación de las Temporadas de F1 "

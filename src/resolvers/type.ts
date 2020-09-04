@@ -14,7 +14,7 @@ const type: IResolvers = {
   Circuit: {
     id: (parent) => parent.circuitId,
     name: (parent) => parent.circuitName,
-    location: parent => parent.Location,
+    location: (parent) => parent.Location,
     urlMobile: (parent) => getWikipediaMobile(parent.url),
   },
   Location: {
@@ -23,9 +23,10 @@ const type: IResolvers = {
   Driver: {
     id: (parent) => parent.driverId,
   },
-  DriverStanding:{
-    driver: (parent) => parent.Driver
-  }
+  DriverStanding: {
+    driver: (parent) => parent.Driver,
+    constructors: (parent) => parent.Constructors,
+  },
 };
 
 export default type;
