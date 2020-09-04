@@ -37,6 +37,11 @@ type Query {
   no es valido tomará el actual.
   """
   getStandings(year: String!): [DriverStanding!]!
+  """
+  Lista de circuitos, requiere ingresar el # de registros que se quiere
+  devolver y la página solicitada.
+  """
+  circuitList(pageElements: Int, page: Int): [Circuit!]!
 }
 
 "Representación de las Temporadas de F1 "
